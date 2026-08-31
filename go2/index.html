@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+</head>
+<body>
+  <script>
+    fetch("../link.txt")
+      .then(response => response.text())
+      .then(text => {
+        const links = text.split(/\r?\n/);
+        const link = links[1].trim();
+
+        if (link) {
+          window.location.replace(link);
+        }
+      });
+  </script>
+</body>
+</html>
