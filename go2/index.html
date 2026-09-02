@@ -13,27 +13,18 @@
     <a id="link" href="#">click here</a>.
   </p>
 
-  <script>
-    fetch("/link.txt")
+ <script>
+    fetch("../link.txt?v=" + Date.now(), {
+      cache: "no-store"
+    })
       .then(response => response.text())
       .then(text => {
         const links = text.split(/\r?\n/);
-        const link = links[1].trim();
-
+        const link = links[0].trim();
+  
         if (link) {
-          const fallback = document.getElementById("fallback");
-          const anchor = document.getElementById("link");
-
-          anchor.href = link;
-          fallback.style.display = "block";
-
           window.location.replace(link);
         }
-      })
-      .catch(error => {
-        document.body.innerHTML =
-          "<p>Could not load the redirect link.</p>";
-        console.error(error);
       });
   </script>
 </body>
